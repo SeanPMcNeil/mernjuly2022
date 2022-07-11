@@ -4,20 +4,25 @@ import { BoxForm } from './components/BoxForm';
 import { BoxDisplay } from './components/BoxDisplay';
 
 function App() {
-  const [boxColor, setBoxColor] = useState("");
-  const [boxWidth, setBoxWidth] = useState();
-  const [boxHeight, setBoxHeight] = useState();
+  const [boxList, setBoxList] = useState([]);
 
-  const newBox = ( newColor, newWidth, newHeight ) => {
-    setBoxColor( newColor);
-    setBoxWidth( newWidth );
-    setBoxHeight( newHeight );
+  const newBox = ( box ) => {
+    const newBox = [...boxList, box]
+    setBoxList(newBox)
   }
 
   return (
     <div className="App">
-      <BoxForm setNewBox={ newBox } />
-      <BoxDisplay boxColor={ boxColor } boxWidth={ boxWidth } boxHeight={ boxHeight }/>
+      <BoxForm newBox={ newBox } />
+        <div style={{display:"flex", gap:"5px", flexWrap:"wrap"}}>
+        {
+          boxList.map((box,i) => {
+            return(
+              <BoxDisplay key={i} box={ box } />
+            )
+          })
+        }
+        </div>
     </div>
   );
 }

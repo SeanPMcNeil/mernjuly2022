@@ -1,16 +1,16 @@
 export const BoxDisplay = (props) => {
-    // const { boxColor } = props;
-    const { boxColor, boxWidth, boxHeight } = props;
-
+    const { box } = props;
+    // console.log(box.color)
+    
     const boxStyle = {
-        backgroundColor: `${ boxColor}`,
-        width: `${ boxWidth }px`,
-        height: `${ boxHeight }px`
+        backgroundColor: `${box.color}`,
+        width: `${ box.width }px`,
+        height: `${ box.height }px`
     };
     
     return(
-        <div style={ boxStyle }>
-
+        <div>
+            <div style={ boxStyle }></div>
         </div>
     )
 }
