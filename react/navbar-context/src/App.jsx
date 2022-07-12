@@ -1,21 +1,19 @@
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.css';
+import '../node_modules/bootstrap/dist/js/bootstrap'
 import { useState } from 'react';
+import { NameProvider } from './NameContext';
+import { Navbar } from './components/Navbar';
+import { Form } from './components/Form';
 
-const UserContext = React.createContext();
 
 function App() {
-  const [name, setName] = useState("Sean McNeil");
-
-  const onNameChange = (name) => {
-    setName(name);
-  }
-
   return (
     <div className="App">
-      <UserContext.Provider value={{ name, onNameChange }}>
-        
-      </UserContext.Provider>
+      <NameProvider>
+        <Navbar />
+        <Form />
+      </NameProvider>
     </div>
   );
 }
