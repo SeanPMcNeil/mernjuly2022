@@ -1,6 +1,5 @@
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
-import '../node_modules/bootstrap/dist/js/bootstrap'
 import { NameProvider } from './NameContext';
 import { Navbar } from './components/Navbar';
 import { Form } from './components/Form';
