@@ -11,10 +11,15 @@ function App() {
     setAllCharacters([...allCharacters, person]);
   }
 
+  const lifeHandler = (index) => {
+    allCharacters[index].isAlive = !allCharacters[index].isAlive;
+    setAllCharacters([...allCharacters]);
+  }
+
   return (
     <div className="App">
       <Form newChar={ addChar } />
-      <Results allChars={ allCharacters } />
+      <Results allChars={ allCharacters } toggleLife={ lifeHandler } />
     </div>
   );
 }
