@@ -1,0 +1,23 @@
+.App {
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-around;
+}
+
+.card {
+  width:300px;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: ghostwhite;
+  margin: 10px;
+  text-decoration: none;
+  color: black;
+}
+
+.card img {
+  width: 100%;
+}

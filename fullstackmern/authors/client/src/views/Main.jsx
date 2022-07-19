@@ -8,7 +8,7 @@ export const Main = props => {
     useEffect(() => {
         axios.get('http://localhost:8000/api/authors')
             .then(res => {
-                setAuthors(res.data);
+                setAuthors(res.data.sort((a,b)=>a.name.localeCompare(b.name)));
             })
             .catch(err => console.error(err));
     }, [authors])
