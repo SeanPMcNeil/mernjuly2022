@@ -20,7 +20,7 @@ module.exports.findOneGame = (req, res) => {
 }
 // UPDATE
 module.exports.updateGame = (req, res) => {
-    Game.findOneAndUpdate({_id: req.params.id }, req.body, {new: true})
+    Game.findOneAndUpdate({_id: req.params.id }, req.body, {new: true, runValidators: true})
         .then(oneGame => res.json(oneGame))
         .catch(err => res.json({message: "Error updating one game!", error: err}))
 }

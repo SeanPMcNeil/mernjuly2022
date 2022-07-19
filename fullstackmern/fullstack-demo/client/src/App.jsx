@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={ <ViewAll /> } />
         <Route path="/add" element={ <AddForm /> } />
-        <Route path="/update" element={ <UpdateForm /> } />
+        <Route path="/update/:id" element={ <UpdateForm /> } />
         <Route path="/game/:id" element={ <ViewOne /> } />
       </Routes>
     </div>
