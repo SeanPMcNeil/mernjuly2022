@@ -4,7 +4,7 @@ import { Main } from './views/Main';
 import { Routes, Route } from 'react-router-dom';
 import { Update } from './views/Update';
 import { New } from './views/New';
-import { AuthorDelete } from './components/AuthorDelete';
+// import { AuthorDelete } from './components/AuthorDelete';
 
 function App() {
 
@@ -15,7 +15,7 @@ function App() {
         <Route element={ <Main />} path="/" />
         <Route element={ <New /> } path="/new" />
         <Route element={ <Update /> } path="/edit/:id" />
-        <Route element={ <AuthorDelete /> } path="/delete/:id" />
+        {/* <Route element={ <AuthorDelete /> } path="/delete/:id" /> */}
       </Routes>
     </div>
   );

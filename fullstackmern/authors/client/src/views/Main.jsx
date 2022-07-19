@@ -13,6 +13,12 @@ export const Main = props => {
             .catch(err => console.error(err));
     }, [authors])
 
+    const handleDelete = (id) => {
+        axios.delete("http://localhost:8000/api/authors/delete/" + id)
+            .then(res => console.log(res))
+            .catch(err => console.error(err));
+    }
+
     return(
         <div className="ps-3 text-start">
             <div>
@@ -31,7 +37,7 @@ export const Main = props => {
                     { authors.map( (author, i) => 
                         <tr key={ i }>
                             <td>{ author.name }</td>
-                            <td><Link to={`/edit/${author._id}`} className="btn btn-warning me-2">Edit</Link><Link to={`/delete/${author._id}`} className="btn btn-danger">Delete</Link></td>
+                            <td><Link to={`/edit/${author._id}`} className="btn btn-warning me-2">Edit</Link><button className="btn btn-danger" onClick={ () => handleDelete(author._id) }>Delete</button></td>
                         </tr>
                     ) }
                 </tbody>
