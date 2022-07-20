@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-export const Form = props => {
+export const Edit = props => {
     const navigate = useNavigate();
+    const { id } = useParams();
+
     const [form, setForm] = useState({
         name: "",
         picture: "",
@@ -11,6 +13,13 @@ export const Form = props => {
         category: "Gaming",
         quantity: 1
     })
+
+    useEffect(() => {
+        axios.get("http://localhost:8000/api/product/" + id)
+            .then(res => setForm(res.data[0]))
+            .catch(err => console.log(err))
+    }, [])
+
     const [error, setError] = useState({});
     
     const onChangeHandler = e => {
@@ -19,12 +28,12 @@ export const Form = props => {
 
     const onSubmitHandler = e => {
         e.preventDefault();
-        axios.post("http://localhost:8000/api/product/create", form)
+        axios.put("http://localhost:8000/api/product/update/" + id, form)
             .then(res => {
                 if(res.data.error){
                     setError(res.data.error.errors);
                 } else {
-                    navigate(`/product/${res.data._id}`)
+                    navigate(`/product/${ id }`)
                 }
             })
             .catch(err => console.log(err))
@@ -32,7 +41,7 @@ export const Form = props => {
 
     return(
         <div>
-            <h2>Add Product</h2>
+            <h2>Edit Product</h2>
             <form onSubmit={ onSubmitHandler } className="w-50 m-auto">
                 <div className="form-group">
                     <label htmlFor="name" className="form-label">Name:</label>
@@ -51,7 +60,7 @@ export const Form = props => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="category" className="form-label">Category:</label>
-                    <select name="category" className="form-select" onChange={ onChangeHandler }>
+                    <select name="category" className="form-select" onChange={ onChangeHandler } value={ form.category }>
                         <option value="Gaming">Gaming</option>
                         <option value="Livestock">Livestock</option>
                         <option value="Household">Household</option>

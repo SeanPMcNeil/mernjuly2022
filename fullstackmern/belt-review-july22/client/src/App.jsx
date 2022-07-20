@@ -4,6 +4,7 @@ import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { Form } from './components/Form';
 import { Home } from './components/Home';
 import { OneProduct } from './components/OneProduct';
+import { Edit } from './components/Edit';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path='/' element={ <Home /> } />
         <Route path='/add' element={ <Form /> } />
         <Route path='/product/:id' element={ <OneProduct /> } />
+        <Route path='/product/edit/:id' element={ <Edit /> } />
       </Routes>
     </div>
   );
