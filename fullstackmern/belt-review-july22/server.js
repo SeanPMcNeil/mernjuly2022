@@ -5,8 +5,8 @@ const port = 8000;
 
 require("./server/config/mongoose.config");
 
-app.use(cors(), express.json(), express.urlencoded({extended:true}))
+app.use(cors(), express.json(), express.urlencoded({extended:true}));
 
-require("./server/routes/name.routes")(app);
+require("./server/routes/product.routes")(app);
 
-app.listen(port, () => console.log(`Running on port: ${port}!`))
+app.listen(port, () => console.log(`Running on port: ${port}!`));
