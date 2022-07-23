@@ -75,3 +75,8 @@ console.log(solution(s3, s4));
 const s5 = "abc";
 const s6 = "def";
 console.log(solution(s5, s6));
+
+// Breaks in this test case
+const s7 = "abbbc";
+const s8 = "dccaa";
+console.log(solution(s7, s8));
