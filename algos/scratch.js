@@ -55,6 +55,10 @@ class Node {
             }
         }
 
+        /*  This breaks if there is more than one valid path (e.g. A -> C -> E && A -> C -> F) 
+            because it won't build the return tree properly. It should work for larger trees IF
+            there is only one valid intersection. */
+
         return result;
     }
 
@@ -105,7 +109,6 @@ class Node {
         this.children.push(child);
         return this;
     }
-    toString() { return this.value }
 }
 
 // Create the trees given in the question
