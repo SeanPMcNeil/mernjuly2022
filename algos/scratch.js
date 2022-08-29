@@ -4,8 +4,18 @@ class Node {
         this.parent = parent;
         this.children = [];
     }
+
+    // For adding children to the tree
+    addChild(value) {
+        var child = new Node(value, this);
+        this.children.push(child);
+        return this;
+    }
     
+    // For finding the insection of 2 trees
     intersection(node) {
+        if (this.value != node.value) return null;
+
         // Create Map from first tree
         let map1 = new Map();
         let allNodes1 = this.breadthFirstSearch();
@@ -34,37 +44,45 @@ class Node {
         }
         
         // Find entries where the values and parents are equal
-        let temp = [];
+        // Done twice over each map in order to make sure we end on a leaf each time
+        let temp1 = [];
+        let temp2 = [];
+
         for (const key1 of map1.keys()) {
             for (const key2 of map2.keys()) {
                 if (key1[0] == key2[0] && key1[1] == key2[1]) {
-                    temp.push(key1);
+                    temp1.push(key1);
+                    temp2.push(key2);
                 }
             }
         }
 
+        // If the final equal node has children, return null (not a "complete" tree)
+        // Because the map set entries in order, the last one *should* be a leaf in each instance
+        if (temp1[temp1.length - 1][2].length !== 0 || temp2[temp2.length - 1][2].length !== 0) return null;
+
         // Build tree for the return result
         let result;
-        for (let k = 0; k < temp.length; k++) {
+        for (let k = 0; k < temp1.length; k++) {
             if (k == 0) {
-                result = new Node(...temp[k][0]);
+                result = new Node(...temp1[k][0]);
             } else if (k == 1) {
-                result.addChild(temp[k][0], temp[k-1][0])
+                result.addChild(temp1[k][0], temp1[k-1][0])
             } else {
-                result.children[k-2].addChild(temp[k][0], temp[k-1][0]);
+                result.children[k-2].addChild(temp1[k][0], temp1[k-1][0]);
             }
         }
 
         /*  This breaks if there is more than one valid path (e.g. A -> C -> E && A -> C -> F) 
-            because it won't build the return tree properly. It should work for larger trees IF
-            there is only one valid intersection. */
+            because it won't build the return tree properly. Also breaks for results > 3 nodes  -_- */
 
         return result;
     }
 
+    // Provides an array of the nodes (including parent and children data) for use in the intersection function
     breadthFirstSearch() {
-        let queue = [];
-        let result = [];
+        let queue = [], 
+            result = [];
 
         let node;
 
@@ -84,6 +102,7 @@ class Node {
         return result;
     }
 
+    // For displaying the tree by level (no connections shown)
     levelOrder() {
         const result = [], 
             queue = [];
@@ -103,12 +122,6 @@ class Node {
         }
         return result;
     }
-
-    addChild(value) {
-        var child = new Node(value, this);
-        this.children.push(child);
-        return this;
-    }
 }
 
 // Create the trees given in the question
@@ -126,4 +139,5 @@ console.log(tree2.levelOrder());
 
 // Get intersection of pairs of these trees
 let intersect = tree1.intersection(tree2);
-console.log(intersect.levelOrder());
+// console.log(intersect);
+if (intersect != null) console.log(intersect.levelOrder());
