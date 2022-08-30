@@ -79,6 +79,26 @@ class Node {
         return result;
     }
 
+    intersection2(node, runner1 = this, runner2 = node) {
+        // If the value is not present in both trees, return null
+        if (runner1.value != runner2.value) return null;
+        // If the value is a leaf in both trees, return the value
+        if (runner1.children.length + runner2.children.length == 0) return [runner1.value];
+
+        let result = [], i = 0, j = 0;
+        while (i < runner1.children.length && j < runner2.children.length) {
+            let a = runner1.children[i], b = runner2.children[j];
+            console.log(`Runner1: ${a.value}`);
+            console.log(`Runner2: ${b.value}`);
+            for (let path in a.intersection2(b)) {
+                result.push([runner1.value, ...path]);
+            }
+            i += (a.value <= b.value); // boolean converts to 0 or 1
+            j += (a.value >= b.value);
+        }
+        return result;
+    }
+
     // Provides an array of the nodes (including parent and children data) for use in the intersection function
     breadthFirstSearch() {
         let queue = [], 
@@ -138,6 +158,8 @@ tree2.children[0].addChild("F").addChild("E");
 console.log(tree2.levelOrder());
 
 // Get intersection of pairs of these trees
-let intersect = tree1.intersection(tree2);
+// let intersect = tree1.intersection(tree2);
 // console.log(intersect);
-if (intersect != null) console.log(intersect.levelOrder());
+// if (intersect != null) console.log(intersect.levelOrder());
+
+console.log(tree1.intersection2(tree2));
